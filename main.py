@@ -1,10 +1,8 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
-
 from settings import settings
 
 app = FastAPI()
-
 
 origins = [
     settings.CLIENT_ORIGIN,
@@ -19,11 +17,6 @@ app.add_middleware(
 )
 
 
-@app.get("/")
-async def root():
+@app.get("/api/healthchecker")
+def root():
     return {"message": "Hello World"}
-
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
